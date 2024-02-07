@@ -17,13 +17,25 @@
         </tbody>
     </table>
     <div>
-        <button class="Beginner16" onclick="">Beginner</button>
-        <button class="Medium64" onclick="">Medium</button>
-        <button class="Expert144" onclick="">Expert</button>
+        <button class="Beginner16" onclick="startGame('beginner')">Beginner</button>
+        <button class="Medium64" onclick="startGame('medium')">Medium</button>
+        <button class="Expert144" onclick="startGame('expert')">Expert</button>
     </div>
+
+    <div class="modal hide">
+        <h2 class="user-msg"><span class="gradient-text">You Won!</span>🏆</h2>
+        <button class="bn30" onclick="onInit()">Restart</button>
+    </div>
+
     <script src="js/util.js"></script>
     <!-- <script src="js/main.js"></script> -->
     <script src="js/minesweeper.js"></script>
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+        event.preventDefault()
+        handleFlag(event)
+    })
+    </script>
 </body>
 
 </html>
