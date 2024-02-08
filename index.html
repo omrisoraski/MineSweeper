@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,19 +12,32 @@
 <body onload="onInit()">
     <h1>Mine Sweeper</h1>
     <h2>Time: <span class="timer">00:000</span></h2>
-    <button>🙂</button>
+    <div>
+        <button class="sm">🙂</button>
+        <button>❤️</button>
+    </div>
 
-	<table>
+    <table>
         <tbody class="board"></tbody>
     </table>
     <div>
-        <button class="Beginner16" onclick="startGame('beginner')">Beginner</button>
-        <button class="Medium64" onclick="startGame('medium')">Medium</button>
-        <button class="Expert144" onclick="startGame('expert')">Expert</button>
+        <button class="level" onclick="startGame('beginner')">Beginner</button>
+        <button class="level" onclick="startGame('medium')">Medium</button>
+        <button class="level" onclick="startGame('expert')">Expert</button>
+    </div>
+
+    <div class="modal hide">
+        <h2 class="user-msg"><span class="gradient-text">You Won!</span>🏆</h2>
+        <button class="bn30" onclick="onInit()">Restart</button>
+    </div>
+
+    <div class="wl" id="message" style="display: none; font-size: 24px; color: red;">
+        <button>Restart</button>
     </div>
 
 
     <script src="js/main.js"></script>
     <script src="js/util.js"></script>
 </body>
+
 </html>

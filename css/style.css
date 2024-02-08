@@ -1,9 +1,11 @@
 * {
     text-align: center;
+
+
 }
 
 table {
-    border: 1px solid black;
+    border: 2px solid rgb(228, 18, 18);
     margin: auto;
     background-color: aquamarine;
 }
@@ -11,14 +13,83 @@ table {
 .board td {
     width: 30px;
     height: 30px;
-    border: 1px solid black;
+    border: 2px solid rgb(238, 234, 15);
     padding: 10px;
     text-align: center;
     transition: background-color 0.5s;
     cursor: pointer;
-    background-color: bisque;
+    background-color: rgb(17, 228, 157);
 }
 
-button{
-    margin: 10px;
+button {
+    margin: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+
+.hide {
+    display: none;
+}
+
+
+.wl {
+    background-color: black;
+    border: 5px solid white;
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    top: 300px;
+    left: calc(50% - 175px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.level {
+    width: 160px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.level:hover {
+    background-position: 100% 0;
+
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.level:focus {
+    outline: none;
+}
+
+.level {
+    background-image: linear-gradient(to right,
+            #f5ce62,
+            #e43603,
+            #fa7199,
+            #e85a19);
+    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
 }
