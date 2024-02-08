@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/style.css">
     <title>Mine Sweeper</title>
 </head>
 
 <body onload="onInit()">
     <h1>Mine Sweeper</h1>
-    <h2>Time: <span>00:00</span></h2>
+    <h2>Time: <span class="timer">00:000</span></h2>
+    <button>🙂</button>
 
-    <table class="board">
-        <tbody>
-        </tbody>
+	<table>
+        <tbody class="board"></tbody>
     </table>
     <div>
         <button class="Beginner16" onclick="startGame('beginner')">Beginner</button>
@@ -22,20 +22,8 @@
         <button class="Expert144" onclick="startGame('expert')">Expert</button>
     </div>
 
-    <div class="modal hide">
-        <h2 class="user-msg"><span class="gradient-text">You Won!</span>🏆</h2>
-        <button class="bn30" onclick="onInit()">Restart</button>
-    </div>
 
+    <script src="js/main.js"></script>
     <script src="js/util.js"></script>
-    <!-- <script src="js/main.js"></script> -->
-    <script src="js/minesweeper.js"></script>
-    <script>
-        document.addEventListener('contextmenu', function(event) {
-        event.preventDefault()
-        handleFlag(event)
-    })
-    </script>
 </body>
-
 </html>
