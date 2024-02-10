@@ -7,19 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/style.css">
     <title>Mine Sweeper</title>
+    
 </head>
 
 <body onload="onInit()">
     <h1>Mine Sweeper</h1>
     <h2>Time: <span class="timer">00:000</span></h2>
     <div>
-        <button class="sm">🙂</button>
-        <button>❤️</button>
+        <button>
+            <span class="text">🙂</span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+          </button>
+          <button>
+            <span class="text">❤️</span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+            <span class="blob"></span>
+          </button>
     </div>
 
     <table>
         <tbody class="board"></tbody>
     </table>
+  
+
     <div>
         <button class="level" onclick="startGame('beginner')">Beginner</button>
         <button class="level" onclick="startGame('medium')">Medium</button>
@@ -28,13 +43,20 @@
 
     <div class="modal hide">
         <h2 class="user-msg"><span class="gradient-text">You Won!</span>🏆</h2>
-        <button class="bn30" onclick="onInit()">Restart</button>
+        <button class="bn30" onclick="restartGame()">Restart</button>
     </div>
 
-    <div class="wl" id="message" style="display: none; font-size: 24px; color: red;">
-        <button>Restart</button>
+    <div class="modal1 hide1">
+        <h2 class="user-msg"><span class="gradient-text">You Lose</span>😎</h2>
+        <button class="bn30" onclick="restartGame()">Restart</button>
     </div>
 
+
+    <div>
+        <h1 class="myname">created by Omri Soraski</h1>
+    </div>
+
+    
 
     <script src="js/main.js"></script>
     <script src="js/util.js"></script>

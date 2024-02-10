@@ -19,35 +19,34 @@ gGame = {
     shownCount: 0,
     markedCount: 0,
     secsPassed: 0
-};
+}
 
 gLevel = {
     SIZE: 4,
     MINES: 2
-};
-
+}
 
 function onInit() {
     gBoard = buildBoard()
     renderBoard(gBoard)
     gGame.isOn = true
+    hideModal()
+    hideModal1()
 
 }
-
 
 function buildBoard() {
     const board = []
     for (var i = 0; i < gLevel.SIZE; i++) {
         board.push([])
         for (var j = 0; j < gLevel.SIZE; j++) {
-            board[i][j] = createCell();
+            board[i][j] = createCell()
         }
     }
     placeMines(board)
     setMinesNegsCount(board)
     return board
 }
-
 
 function renderBoard(board) {
     var strHTML = '<table border="0"><tbody>'
@@ -56,7 +55,7 @@ function renderBoard(board) {
         for (var j = 0; j < board[0].length; j++) {
             var cell = board[i][j];
             var className = 'cell cell-' + i + '-' + j
-            strHTML += '<td class="' + className + '" onclick="onCellClicked(this, ' + i + ', ' + j + ')" oncontextmenu="onCellMarked(this, event); return false;"> '
+            strHTML += '<td class="' + className + '" onclick="onCellClicked(this, ' + i + ', ' + j + ')" oncontextmenu="onCellMarked(this, event); return false;">'
             if (cell.isShown) {
                 if (cell.isMine) {
                     strHTML += MINE
@@ -109,9 +108,9 @@ function setMinesNegsCount(board) {
 function onCellClicked(elCell, i, j) {
     if (!gGame.isOn) return
 
-    
+
     if (!isTimerStarted) {
-        startTimer();
+        startTimer()
         isTimerStarted = true
     }
 
@@ -120,9 +119,13 @@ function onCellClicked(elCell, i, j) {
 
     cell.isShown = true
     if (cell.isMine) {
-        elCell.innerHTML = MINE;
-        console.log('Game Over! Stepped on a mine!')
+        elCell.innerHTML = MINE
+
         stopTimer()
+        gGame.isOn = false
+        showModalLose()
+        changeSmiley('😵')
+
     } else {
         elCell.innerHTML = cell.minesAroundCount > 0 ? cell.minesAroundCount : EMPTY
         if (cell.minesAroundCount === 0) {
@@ -156,13 +159,13 @@ function checkGameOver() {
         for (var j = 0; j < gLevel.SIZE; j++) {
             const cell = gBoard[i][j];
             if (cell.isMine && !cell.isMarked) {
-                win = false;
+                win = false
             } else if (!cell.isMine && !cell.isShown) {
-                win = false;
+                win = false
             }
             if (cell.isMine && cell.isShown) {
-                lose = true;
-                break;
+                lose = true
+                break
             }
         }
         if (lose) break
@@ -171,15 +174,9 @@ function checkGameOver() {
     if (win || lose) {
         gGame.isOn = false
         stopTimer()
-        const message = win ? 'You Win!' : 'You Lose!'
-        
-        const messageElement = document.getElementById('message')
-        messageElement.innerText = message
-        messageElement.style.display = 'block'
+        showModal()
     }
-    
 }
-
 
 function expandShown(board, elCell, i, j) {
     for (var di = -1; di <= 1; di++) {
@@ -187,13 +184,13 @@ function expandShown(board, elCell, i, j) {
             if (di === 0 && dj === 0) continue
             const ni = i + di
             const nj = j + dj
-            board[i][j].isShown = true;
+            board[i][j].isShown = true
             updateCellUI(i, j)
             if (ni >= 0 && ni < gLevel.SIZE && nj >= 0 && nj < gLevel.SIZE) {
-                const neighbor = board[ni][nj];
+                const neighbor = board[ni][nj]
                 if (!neighbor.isMine && !neighbor.isShown) {
                     neighbor.isShown = true
-                    
+
                     const neighborEl = document.querySelector(`.cell-${ni}-${nj}`)
                     neighborEl.innerHTML = neighbor.minesAroundCount > 0 ? neighbor.minesAroundCount : EMPTY
                     neighborEl.classList.add('shown')
@@ -206,14 +203,10 @@ function expandShown(board, elCell, i, j) {
     }
 }
 
-
 function updateCellUI(i, j) {
     const elCell = document.querySelector(`.cell-${i}-${j}`)
-    elCell.style.backgroundColor = "lightgray"
+    elCell.style.backgroundColor = "white"
 }
-
-
-
 
 function createCell() {
     return {
@@ -221,7 +214,7 @@ function createCell() {
         isShown: false,
         isMine: false,
         isMarked: false
-    };
+    }
 }
 
 function startGame(level) {
@@ -238,8 +231,43 @@ function startGame(level) {
     onInit()
 }
 
+function restartGame() {
+    stopTimer()
+    gGame.isOn = false
+    isTimerStarted = false
+    hideModal()
+    hideModal1()
+    onInit()
+}
+
+function showModal() {
+    const elModal = document.querySelector('.modal')
+    elModal.classList.remove('hide')
+
+
+}
+
+function hideModal() {
+    const elModal = document.querySelector('.modal')
+    elModal.classList.add('hide')
+
+}
+
+function showModalLose() {
+    const elModal1 = document.querySelector('.modal1')
+    elModal1.classList.remove('hide1')
+
+
+}
+
+function hideModal1() {
+    const elModal1 = document.querySelector('.modal1')
+    elModal1.classList.add('hide1')
+
+}
+
 function startTimer() {
-    if (timerInterval) { 
+    if (timerInterval) {
         clearInterval(timerInterval)
     }
     startTime = Date.now()
@@ -252,7 +280,7 @@ function updateTimer() {
     var seconds = Math.floor(timeElapsed / 1000)
     var milliseconds = timeElapsed % 1000
 
-    
+
     var formattedTime = seconds + ':' + ('000' + milliseconds).slice(-3)
 
     document.querySelector('.timer').innerText = formattedTime
@@ -266,7 +294,7 @@ function stopTimer() {
 }
 
 function changeSmiley() {
-    const elSmiley = document.querySelector('.sm')
+    const elSmiley = document.querySelector('.text')
     if (gGame.isOn) {
         elSmiley.innerHTML = '😎'
     } else {
